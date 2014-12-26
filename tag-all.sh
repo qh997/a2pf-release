@@ -5,6 +5,12 @@ cd $WORKDIR
 
 TAG=$1
 VER=$2
+
+if [ -z $TAG -o -z $VER ]; then
+	echo "USAGE: $0 [tag] [version]"
+	exit 1
+fi
+
 shift; shift;
 
 ANDR=${1:-false}

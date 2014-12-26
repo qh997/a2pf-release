@@ -4,26 +4,41 @@
 
 ver=$1
 
+if [ -z ${ver} ]; then
+	echo "USAGE: $0 VER"
+	exit 1
+fi
+
 workfolder=$(pwd)
 ifile='pp_setup'
-publish_dir=`cat conf/ar.conf | grep 'rls_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
-publish_dir="${publish_dir}/${ver}/setup/"
+release_dir=`cat conf/ar.conf | grep 'rls_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
+release_dir="${release_dir}/${ver}/setup/"
+publish_dir=`cat conf/ar.conf | grep 'pul_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
+publish_dir=$publish_dir'/'${ver}'/setup/'
 tmp_dir='/tmp/a2pf-release/'${ver}'/setup/'
-
-if [ ! -e ${publish_dir} ]; then
-	echo "ERROR - Cannot found ${publish_dir}."
-	exit -1
-fi
 
 if [ ! -e ${ifile} ]; then
 	echo "ERROR - Cannot found ${ifile}."
-	exit -1
+	exit 1
 fi
 
-rm -rf ${publish_dir}
-mkdir -p ${publish_dir}
+if [ ! -e ${release_dir} ]; then
+	echo "ERROR - Cannot found ${release_dir}."
+	exit 1
+fi
+
+rm -rf ${release_dir}
+mkdir -p ${release_dir}
 rm -rf ${tmp_dir}
 mkdir -p ${tmp_dir}
+
+if [ ! -e ${publish_dir} ]; then
+	echo "ERROR - Cannot found ${publish_dir}."
+	exit 1
+fi
+
+sudo rm -rf ${publish_dir}
+sudo mkdir -p ${publish_dir}
 
 for line in `awk -F: '{print $2 "/" $3}' ${ifile}`; do
 	filename=$(basename $line)
@@ -55,6 +70,7 @@ tar_file="${tmp_dir}../setup.tar.bz2"
 rm -rf "${tar_file}"
 echo "tar setup"
 tar -C "${tmp_dir}/../" -jcvf "${tar_file}" setup
-cp "${tar_file}" "${publish_dir}"
+cp "${tar_file}" "${release_dir}"
+sudo cp "$tar_file" "${publish_dir}"
 
 rm -rf ${ifile}
