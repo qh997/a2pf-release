@@ -1,0 +1,28 @@
+#!/bin/bash -ex
+
+WORKDIR=$(cd `dirname $0`; pwd)
+cd $WORKDIR
+
+TAG=$1
+VER=$2
+shift; shift;
+
+ANDR=${1:-false}
+COMM=${2:-false}
+CASE=${3:-false}
+SETP=${4:-false}
+set $ANDR $COMM $CASE $SETP
+
+subs="android common case setup"
+
+svn_dir=`cat conf/ar.conf | grep 'tag_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
+./svn-sweep $svn_dir
+
+for sub in $subs; do
+	doit=$1
+	shift
+
+	if [ ${doit} == 'true' ]; then
+		./tag.pl -t ${TAG} -v ${VER} -c ${sub}
+	fi
+done

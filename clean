@@ -1,0 +1,17 @@
+#!/bin/bash -ex
+
+WORKDIR=$(cd `dirname $0`; pwd)
+cd $WORKDIR
+
+rm -rf 'command.log'
+rm -rf 'error.log'
+rm -rf 'pb_android'
+rm -rf 'pp_case'
+rm -rf 'pp_common'
+rm -rf 'pp_setup'
+rm -rf 'pylt.log'
+rm -rf 'pp_android'
+rm -rf 'tag_android'
+rm -rf 'tag_case'
+rm -rf 'tag_common'
+rm -rf 'tag_setup'
