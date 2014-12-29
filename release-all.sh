@@ -47,6 +47,8 @@ if [ $SETP == 'true' ]; then
 	touch stp_ok
 fi
 
+./svn-arrange $svn_dir
+
 rls_dir=`cat conf/ar.conf | grep 'rls_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
 rn_path=`cat conf/ar.conf | grep 'rn_path' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
 publish_dir=`cat conf/ar.conf | grep 'pul_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
