@@ -53,5 +53,5 @@ rls_dir=`cat conf/ar.conf | grep 'rls_root_dir' | awk -F'=' '{print $2}' | sed -
 rn_path=`cat conf/ar.conf | grep 'rn_path' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
 publish_dir=`cat conf/ar.conf | grep 'pul_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
 publish_dir=$publish_dir/${ver}
-echo sudo rm -rf "${publish_dir}/${rn_path}"
-echo sudp cp "${rls_dir}/${ver}/${rn_path}" "${publish_dir}/${rn_path}"
+sudo rm -rf "${publish_dir}/${rn_path}"
+sudp cp "${rls_dir}/${ver}/${rn_path}" "${publish_dir}/${rn_path}"

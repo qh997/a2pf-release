@@ -5,6 +5,7 @@ cd $WORKDIR
 
 TAG=$1
 VER=$2
+CPL=${3:-true}
 
 if [ -z $TAG -o -z $VER ]; then
 	echo "USAGE: $0 [tag] [version]"
@@ -13,4 +14,7 @@ fi
 
 ./prepare.pl -t "$TAG" -v "$VER" -c 'android'
 ./prebuild.pl -t "$TAG" -v "$VER" -c 'android'
-./build-base.sh "$TAG"
+
+if [ ${CPL} = 'true' ]; then
+	./build-base.sh "$TAG"
+fi
