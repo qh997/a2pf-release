@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 export HOME=/home/gengs
 
@@ -33,7 +33,16 @@ fi
 
 svn_dir=`cat conf/ar.conf | grep 'rls_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
 svn_dir=${svn_dir}'/'${VER}
-svn_cer=`cat conf/ar.conf | grep 'svn_cer' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
-svn commit -m "Release for ${VER} on <${TAG}>." ${svn_cer} "${svn_dir}"
+set -v
+echo svn commit -m "Release for ${VER} on <${TAG}>." --username 'gengs' --password '***' "${svn_dir}"
+svn commit -m "Release for ${VER} on <${TAG}>." --username 'gengs' --password 'qh997@NEU3' "${svn_dir}"
+set +v
+
+svn_dir=`cat conf/ar.conf | grep 'tag_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
+svn_dir=${svn_dir}'/'${VER}
+set -v
+echo svn commit -m "Tag for ${VER} on <${TAG}>." --username 'gengs' --password '***' "${svn_dir}"
+svn commit -m "Tag for ${VER} on <${TAG}>." --username 'gengs' --password 'qh997@NEU3' "${svn_dir}"
+set +v
 
 ./clean
