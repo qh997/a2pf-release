@@ -22,23 +22,22 @@ if [ ! -e ${ifile} ]; then
 	exit 1
 fi
 
+rm -rf ${release_dir}
+mkdir -p ${release_dir}
 if [ ! -e ${release_dir} ]; then
 	echo "ERROR - Cannot found ${release_dir}."
 	exit 1
 fi
 
-rm -rf ${release_dir}
-mkdir -p ${release_dir}
-rm -rf ${tmp_dir}
-mkdir -p ${tmp_dir}
-
+sudo rm -rf ${publish_dir}
+sudo mkdir -p ${publish_dir}
 if [ ! -e ${publish_dir} ]; then
 	echo "ERROR - Cannot found ${publish_dir}."
 	exit 1
 fi
 
-sudo rm -rf ${publish_dir}
-sudo mkdir -p ${publish_dir}
+rm -rf ${tmp_dir}
+mkdir -p ${tmp_dir}
 
 for line in `awk -F: '{print $2 "/" $3}' ${ifile}`; do
 	filename=$(basename $line)
