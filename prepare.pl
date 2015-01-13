@@ -79,7 +79,12 @@ foreach my $row ($row_min..$row_max) {
 		say '';
 
 		if ($CFG::func_url->{$classify_name}) {
-			push @export_targets, split(',', $rvs{$CFG::func_url->{$classify_name}});
+			if ($rvs{$CFG::func_url->{$classify_name}} =~ m/^\s*all\s*$/i) {
+				push @export_targets, '';
+			}
+			else {
+				push @export_targets, split(',', $rvs{$CFG::func_url->{$classify_name}});
+			}
 		}
 		else {
 			push @export_targets, '';
