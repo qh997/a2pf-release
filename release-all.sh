@@ -19,6 +19,7 @@ ANDR=${1:-false}
 COMM=${2:-false}
 CASE=${3:-false}
 SETP=${4:-false}
+MANU=${5:-false}
 
 svn_dir=`cat conf/ar.conf | grep 'rls_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
 svn_dir=${svn_dir}'/'${VER}
@@ -45,6 +46,12 @@ if [ $SETP == 'true' ]; then
 	./prepare.pl -t $TAG -v $VER -c 'setup'
 	./publish-setup.sh $VER
 	touch stp_ok
+fi
+
+if [ $MANU == 'true' ]; then
+	./prepare.pl -t $TAG -v $VER -c 'manual'
+	./publish-manual.sh $VER
+	touch mau_ok
 fi
 
 ./svn-arrange $svn_dir

@@ -17,9 +17,10 @@ ANDR=${1:-false}
 COMM=${2:-false}
 CASE=${3:-false}
 SETP=${4:-false}
-set $ANDR $COMM $CASE $SETP
+MANU=${5:-false}
+set $ANDR $COMM $CASE $SETP $MANU
 
-subs="android common case setup"
+subs="android common case setup manual"
 
 svn_dir=`cat conf/ar.conf | grep 'tag_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
 ./svn-sweep $svn_dir

@@ -20,13 +20,14 @@ ANDR=${1:-false}
 COMM=${2:-false}
 CASE=${3:-false}
 SETP=${4:-false}
+MANU=${5:-false}
 
-if [[ ! $ANDR == 'true' || ! $COMM == 'true' || ! $CASE == 'true' || ! $SETP == 'true' ]]; then
-	echo "USAGE: $0 [tag] [version] COMMIT true true ture ture"
+if [[ ! $ANDR == 'true' || ! $COMM == 'true' || ! $CASE == 'true' || ! $SETP == 'true' || ! $MANU == 'true' ]]; then
+	echo "USAGE: $0 [tag] [version] COMMIT true true ture ture true"
 	exit 1
 fi
 
-if [[ ! -e adr_ok || ! -e com_ok || ! -e cse_ok || ! -e stp_ok ]]; then
+if [[ ! -e adr_ok || ! -e com_ok || ! -e cse_ok || ! -e stp_ok || ! -e mau_ok  ]]; then
 	echo "ERROR - Missing *_ok file, run release-all.sh frist."
 	exit 1
 fi
