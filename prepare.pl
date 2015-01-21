@@ -66,7 +66,8 @@ foreach my $row ($row_min..$row_max) {
 
 		print "\tRow: ", $row + 1, " - $rvs{name}";
 
-		if (defined $rvs{version} && $rvs{version} ne '-') {
+		if ((!defined $ENV{DAILY_BUILD} || $ENV{DAILY_BUILD} ne 'true')
+			&& (defined $rvs{version} && $rvs{version} ne '-')) {
 			if ($rvs{version} =~ m/^r\d+$/i) {
 				print " - $rvs{version}";
 				$export_ver = "-r $rvs{version}";
@@ -75,6 +76,9 @@ foreach my $row ($row_min..$row_max) {
 				say '';
 				GM::error("Invalid version [$rvs{version}] for [$rvs{name}], in row ".($row + 1));
 			}
+		}
+		else {
+			say ' - <latest>';
 		}
 		say '';
 
@@ -127,13 +131,13 @@ sub get_version {
 		return "${url}|${version}";
 	}
 	else {
-		my @_ver = `svn log -l1 -q "$url"`;
+		my @_ver = `svn log -l1 -q $CFG::svn_cer "$url"`;
 		say "@_ver";
-		my $crt_vet = (split(/\|/, $_ver[1]))[0];
-		$crt_vet =~ s/^\s+//;
-		$crt_vet =~ s/\s+$//;
-		say "\$crt_vet = [$crt_vet]";
-		return "${url}|${crt_vet}"
+		my $crt_ver = (split(/\|/, $_ver[1]))[0];
+		$crt_ver =~ s/^\s+//;
+		$crt_ver =~ s/\s+$//;
+		say "\$crt_ver = [$crt_ver]";
+		return "${url}|${crt_ver}";
 	}
 }
 

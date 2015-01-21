@@ -47,3 +47,7 @@ svn commit -m "Tag for ${VER} on <${TAG}>." --username 'gengs' --password 'qh997
 set +v
 
 ./clean
+
+if [ `echo ${VER} | grep -v '[0-9][0-9]*\.[0-9][0-9]*'` ]; then
+	sed -i "s/base-tag = .*/base-tag = ${TAG}/" conf/daily.conf
+fi
