@@ -12,3 +12,4 @@ tag_manual
 tag_setup
 svn-sweep
 *_ok
+conf/daily.conf

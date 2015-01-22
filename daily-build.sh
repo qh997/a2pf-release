@@ -74,5 +74,5 @@ else
 	./release-all.sh ${tag} ${sub_ver} true true true true true # <Release All>
 	./tag-all.sh ${tag} ${sub_ver} true true true true true # <Tag All>
 
-	sudo mail-maker.pl -s daily-compile-success -f VERSION=$sub_ver
+	sudo mail-maker.pl -s daily-compile-success -f VERSION=$sub_ver MAIN-VERSION="${tag}"
 fi
