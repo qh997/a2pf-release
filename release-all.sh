@@ -63,3 +63,5 @@ publish_dir=$publish_dir/${VER}
 sudo rm -rf "${publish_dir}/${rn_path}"
 sudo mkdir -p `dirname "${publish_dir}/${rn_path}"`
 sudo cp "${rls_dir}/${VER}/${rn_path}" "${publish_dir}/${rn_path}"
+
+sudo mail-maker -s rls-rlsall-success -f VERSION="${VER}" MAIN-VERSION="${TAG}"
