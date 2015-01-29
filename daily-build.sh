@@ -23,7 +23,7 @@ init $@
 
 svn_dir=`cat conf/ar.conf | grep 'rls_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
 
-tag=`cat conf/daily.conf | grep 'base-tag' | awk -F'=' '{print $2}' | sed -e "s/^ +//" | sed -e "s/ +$//"`
+tag=`cat conf/daily.conf | grep 'base-tag' | awk -F'=' '{print $2}' | sed -e 's/^  *//' | sed -e 's/  *$//'`
 if [ -z $tag ]; then
 	tag=`svn ls --username gengs --password 'qh997@NEU3' \
 		'http://10.1.42.140/svn/apf_apn_ten_svn_src/arm/tags/' \
@@ -74,5 +74,5 @@ else
 	./release-all.sh ${tag} ${sub_ver} true true true true true # <Release All>
 	./tag-all.sh ${tag} ${sub_ver} true true true true true # <Tag All>
 
-#	sudo mail-maker -s daily-compile-success -f VERSION=$sub_ver MAIN-VERSION="${tag}"
+	sudo mail-maker -s daily-compile-success -f "VERSION=$sub_ver" "MAIN-VERSION=${tag}"
 fi
