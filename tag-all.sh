@@ -33,3 +33,4 @@ for sub in $subs; do
 		./tag.pl -t ${TAG} -v ${VER} -c ${sub}
 	fi
 done
+./tag.pl -t ${TAG} -v ${VER} -c preload

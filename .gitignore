@@ -5,11 +5,13 @@ pp_case
 pp_common
 pp_setup
 pp_android
+pp_preload
 tag_android
 tag_case
 tag_common
 tag_manual
 tag_setup
+tag_preload
 svn-sweep
 *_ok
 conf/daily.conf

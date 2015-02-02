@@ -54,6 +54,9 @@ if [ $MANU == 'true' ]; then
 	touch mau_ok
 fi
 
+./prepare.pl -t $TAG -v $VER -c 'preload'
+./publish-preload.sh $VER
+
 ./svn-arrange $svn_dir
 
 rls_dir=`cat conf/ar.conf | grep 'rls_root_dir' | awk -F'=' '{print $2}' | sed -e "s/.*'\(.*\)'.*/\1/"`
