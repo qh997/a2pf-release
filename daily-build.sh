@@ -60,6 +60,8 @@ if [ "$prepare" = "1" ]; then
 	set -v
 	svn commit -m "Release for ${sub_ver} on <${tag}>." --username 'gengs' --password 'qh997@NEU3' "${svn_dir}"
 	set +v
+
+	sudo mail-maker -s daily-new-version -f "VERSION=$sub_ver"
 elif [ "$commit" = "1" ]; then
 	sub_ver="${ver}.${sub_ver}"
 	echo "Commit for release '$sub_ver'"
