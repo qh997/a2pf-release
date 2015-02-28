@@ -35,9 +35,9 @@ ver=`svn ls --username gengs --password 'qh997@NEU3' \
 	'http://10.1.42.140/svn/ADA/02%20DevelopLibrary/05.A2PF_ST/04.Coding/01.Functional/03.Release/' \
 	| sort -r | sed -n '1p' | sed 's/\/$//'`
 
-if [ `echo $ver | grep '[0-9]*\.[0-9]*'` ]; then
-	sub_ver=$(echo $ver | sed 's/^[0-9]*\.//')
-	ver=$(echo $ver | sed 's/\.[0-9]*$//')
+if [ `echo $ver | grep '[0-9A-Fa-f]*\.[0-9]*'` ]; then
+	sub_ver=$(echo $ver | sed 's/^[0-9A-Fa-f]*\.//')
+	ver=$(echo $ver | sed 's/\.[0-9A-Fa-f]*$//')
 else
 	sub_ver=000
 fi
